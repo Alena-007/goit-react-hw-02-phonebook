@@ -1,8 +1,10 @@
 import { Component } from 'react';
+import { nanoid } from 'nanoid';
+import { GlobalStyle } from '../GlobalStyle';
+import { Box } from './Box';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
-import { nanoid } from 'nanoid';
 
 export class App extends Component {
   state = {
@@ -54,16 +56,21 @@ export class App extends Component {
     const { filter, name, number } = this.state;
     const visibleContacts = this.getVisibleContacts();
     return (
-      <div>
-        <h1>Phonebook</h1>
+      <Box width="600px" ml="auto" mr="auto" p={4}>
+        <Box as="h1" mb={4}>
+          Phonebook
+        </Box>
         <ContactForm onSubmit={this.addContact} name={name} number={number} />
-        <h2>Contacts</h2>
+        <Box as="h2" mb={3}>
+          Contacts
+        </Box>
         <Filter filter={filter} onChange={this.changeFilter} />
         <ContactList
           contacts={visibleContacts}
           removeContact={this.removeContact}
         />
-      </div>
+        <GlobalStyle />
+      </Box>
     );
   }
 }
