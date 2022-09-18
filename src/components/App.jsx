@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import { ContactForm } from './ContactForm/ContactForm';
+import { Filter } from './Filter/Filter';
+import { ContactList } from './ContactList/ContactList';
 import { nanoid } from 'nanoid';
 
 export class App extends Component {
@@ -56,25 +58,11 @@ export class App extends Component {
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.addContact} name={name} number={number} />
         <h2>Contacts</h2>
-        <label>
-          Find contacts by name
-          <input
-            type="text"
-            name="filter"
-            value={filter}
-            onChange={this.changeFilter}
-          />
-        </label>
-        <ul>
-          {visibleContacts.map(contact => (
-            <li key={contact.id}>
-              {contact.name}: {contact.number}
-              <button onClick={() => this.removeContact(contact.id)}>
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
+        <Filter filter={filter} onChange={this.changeFilter} />
+        <ContactList
+          contacts={visibleContacts}
+          removeContact={this.removeContact}
+        />
       </div>
     );
   }
