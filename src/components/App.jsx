@@ -28,7 +28,9 @@ export class App extends Component {
       number,
     };
     const { contacts } = this.state;
-    const isExistContact = contacts.find(contact => contact.name === name);
+    const isExistContact = contacts.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
     if (isExistContact) {
       alert(`${name} is already in contacts`);
       return;
@@ -53,14 +55,14 @@ export class App extends Component {
   };
 
   render() {
-    const { filter, name, number } = this.state;
+    const { filter } = this.state;
     const visibleContacts = this.getVisibleContacts();
     return (
       <Box width="600px" ml="auto" mr="auto" p={4}>
         <Box as="h1" mb={4}>
           Phonebook
         </Box>
-        <ContactForm onSubmit={this.addContact} name={name} number={number} />
+        <ContactForm onSubmit={this.addContact} />
         <Box as="h2" mb={3}>
           Contacts
         </Box>
